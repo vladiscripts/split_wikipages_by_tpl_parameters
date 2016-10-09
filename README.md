@@ -11,4 +11,6 @@ http://mwparserfromhell.readthedocs.io/en/latest/index.html#installation
 Для чего желательно установить Git (https://ru.wikipedia.org/wiki/Git) c https://git-scm.com/.
 
 Настройки.
-listpages_filename - файл со списком страниц для обработки
+* listpages_filename - файл со списком страниц для обработки
+* функция pagetitle_target() - форматирование заголовка целевой страницы
+* edit_comment1, edit_comment2 - комментарии к правкам
