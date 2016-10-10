@@ -72,7 +72,7 @@ for title_original in listpages:
 	# Парсинг
 	wikicode1 = mwparserfromhell.parse(text_original)
 	wikicode2 = mwparserfromhell.parse(text_original)
-	
+
 	page1.text = str(remove_parameters(wikicode1, var_template, 1))
 	page2.text = str(remove_parameters(wikicode2, var_template, 2))
 
