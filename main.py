@@ -8,7 +8,7 @@ import mwparserfromhell
 import pywikibot
 
 listpages_filename = 'listpages.txt'  # список страниц для обработки
-var_template = ('ВАР')
+var_template = ('ВАР', 'ВАР2')
 
 
 def pagetitle_target(title):
@@ -50,33 +50,37 @@ def file_readlines_in_set(filename):
 def remove_parameters(wikicode, tpl_name, param_name):
 	for tpl in wikicode.filter_templates():
 		if tpl.name.matches(tpl_name):
-			param = tpl.get(param_name).value if tpl.has(param_name) else None
-			wikicode.replace(tpl, param)
+			param = tpl.get(param_name).value if tpl.has(param_name) else ''
+			wikicode.replace(tpl, str(param))
+			pass
 	return wikicode
 
 
 site = pywikibot.Site('ru', 'wikisource')
 
 listpages = file_readlines_in_set(listpages_filename)
-for title_origin in listpages:
-	if title_origin == '': continue
+for title_original in listpages:
+	if title_original == '': continue
 
 	# Открытие страниц
-	page1 = pywikibot.Page(site, title_origin)
+	page1 = pywikibot.Page(site, title_original)
 	text_original = page1.get()
-	title2 = pagetitle_target(title_origin)
+
+	title2 = pagetitle_target(title_original)
 	page2 = pywikibot.Page(site, title2)
 
 	# Парсинг
 	wikicode1 = mwparserfromhell.parse(text_original)
-	page1.text = str(remove_parameters(wikicode1, var_template, 1))
 	wikicode2 = mwparserfromhell.parse(text_original)
+	
+	page1.text = str(remove_parameters(wikicode1, var_template, 1))
 	page2.text = str(remove_parameters(wikicode2, var_template, 2))
 
 	# Запись страниц
 	edit_comment1 = 'перенесено на ' + '[[' + title2 + ']]'
 	page1.save(edit_comment1)
-	edit_comment2 = 'перенесено из ' + '[[' + title_origin + ']]'
+
+	edit_comment2 = 'перенесено из ' + '[[' + title_original + ']]'
 	page2.save(edit_comment2)
 
 	pass
