@@ -9,6 +9,10 @@
 http://mwparserfromhell.readthedocs.io/en/latest/index.html#installation
 Для чего желательно установить Git (https://ru.wikipedia.org/wiki/Git) c https://git-scm.com/.
 
+Запуск.
+1. Внести в файл listpages.txt список страниц
+2. Запустить "python splitpages.py"
+
 Настройки.
 * listpages_filename - файл со списком страниц для обработки
 * функция pagetitle_target() - форматирование заголовка целевой страницы

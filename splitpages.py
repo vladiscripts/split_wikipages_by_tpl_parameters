@@ -82,5 +82,3 @@ for title_original in listpages:
 
 	edit_comment2 = 'перенесено из ' + '[[' + title_original + ']]'
 	page2.save(edit_comment2)
-
-	pass
